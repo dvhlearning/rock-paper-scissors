@@ -24,6 +24,20 @@ function getRoundNumber() {
     return roundNumber;
 }
 
+function replayGame() {
+    let playChoice = prompt("Would you like to play again (yes or no)?:");
+    if (playChoice === 'yes') {
+        console.clear();
+        playGame();
+    } else if (playChoice === 'no') {
+        console.log("\nHave a good day!");
+    } else {
+        console.log("Error: incorrect answer");
+        playChoice = prompt("Would you like to play again (yes or no)?:");
+        replayGame();
+    }
+}
+
 function playGame() {
     let rounds = getRoundNumber();
     let humanScore = 0;
@@ -94,6 +108,7 @@ function playGame() {
         console.log("Error: incorrect scores")
     }
     
+    replayGame();
 }
 
 playGame();
