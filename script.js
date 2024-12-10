@@ -13,25 +13,30 @@ function getComputerChoice() {
 }
 
 function getHumanChoice(){
-    let choice = prompt("Please Enter Your Choice:", "rock, paper OR scissors");
+    let choice = prompt("Please Enter Your Choice (rock, paper or scissors):");
    
     return choice;
 }
 
-function playGame() {
+function playGame(roundNum) {
+    let rounds = roundNum;
     let humanScore = 0;
     let computerScore = 0;
+
+    console.log("Welcome to Rock Paper Scissors!\nYou are playing to " + rounds + " rounds");
 
     function playRound(humanChoice, computerChoice) {
         humanChoice = humanChoice.toLowerCase();
     
         if (humanChoice != "rock" && humanChoice != "paper" && humanChoice != "scissors"){
-            console.log("Error: '" + humanChoice + "' is an incorrect Selection, try again.")
+            console.log("Error: '" + humanChoice + "' is an incorrect Selection, try again.");
+            humanChoice = getHumanChoice().toLowerCase();
+            playRound(humanChoice, computerChoice);
         } else {
             console.log("You selected: " + humanChoice);
             if (humanChoice === "rock"){
                 if (computerChoice === "rock") {
-                    console.log("Tie! Scissors cancels scissors.");
+                    console.log("Tie! Rock cancels rock.");
                 } else if (computerChoice === "paper") {
                     console.log("You lose! Paper beats rock.");
                     computerScore++;
@@ -61,13 +66,27 @@ function playGame() {
                 }
             }
     
-            console.log("Your Score: " + humanScore);
-            console.log("Computer Score: " + computerScore);
+            console.log("Your Score: " + humanScore + " vs. Computer: " + computerScore);
         }
     }
 
+    for (let index = 0; index < rounds; index++) {
+        console.log("\nROUND #" + (index + 1) + "...");
+        playRound(getHumanChoice(),getComputerChoice());
+    }
     
-
+    if (humanScore > computerScore) {
+        console.log("\nCONGRATULATIONS! You win the game!")
+        console.log("Your Score: " + humanScore + " vs. Computer: " + computerScore);
+    } else if (humanScore < computerScore) {
+        console.log("\nTOO BAD! You lose the game!")
+        console.log("Your Score: " + humanScore + " vs. Computer: " + computerScore);
+    } else if (humanScore === computerScore) {
+        console.log("\nYOU TIED THE GAME!")
+        console.log("Your Score: " + humanScore + " vs. Computer: " + computerScore);
+    } else {
+        console.log("Error: incorrect scores")
+    }
 }
 
-playRound(getHumanChoice(),getComputerChoice());
+playGame(3);
