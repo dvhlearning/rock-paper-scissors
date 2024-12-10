@@ -18,8 +18,14 @@ function getHumanChoice(){
     return choice;
 }
 
-function playGame(roundNum) {
-    let rounds = roundNum;
+function getRoundNumber() {
+    let roundNumber = prompt("Welcome to Rock Paper Scissors!\nHow many rounds would you like to play?:");
+
+    return roundNumber;
+}
+
+function playGame() {
+    let rounds = getRoundNumber();
     let humanScore = 0;
     let computerScore = 0;
 
@@ -87,6 +93,7 @@ function playGame(roundNum) {
     } else {
         console.log("Error: incorrect scores")
     }
+    
 }
 
-playGame(3);
+playGame();
