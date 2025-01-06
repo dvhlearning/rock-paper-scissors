@@ -18,12 +18,6 @@ function getHumanChoice(){
     return choice;
 }
 
-function getRoundNumber() {
-    let roundNumber = prompt("Welcome to Rock Paper Scissors!\nHow many rounds would you like to play?:");
-
-    return roundNumber;
-}
-
 function replayGame() {
     let playChoice = prompt("Would you like to play again (yes or no)?:");
     if (playChoice === 'yes') {
@@ -38,12 +32,18 @@ function replayGame() {
     }
 }
 
+function displayMessage(content) {
+    let mBox = document.querySelector(".messageBox");
+    mBox.textContent = content;
+}
+
 function playGame() {
-    let rounds = getRoundNumber();
+    let rounds = 5;
     let humanScore = 0;
     let computerScore = 0;
 
-    console.log("Welcome to Rock Paper Scissors!\nYou are playing to " + rounds + " rounds");
+
+    displayMessage("Welcome to Rock Paper Scissors!\nYou are playing to " + rounds + " rounds");
 
     function playRound(humanChoice, computerChoice) {
         humanChoice = humanChoice.toLowerCase();
