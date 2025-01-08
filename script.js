@@ -56,16 +56,19 @@ function colorBoxes(outcome) {
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
-    let messageLines = document.querySelector(".messageBox");
-    let bottomMessage = document.querySelector('.messageBoxTier2');
+    const messageLines = document.querySelector(".messageBox");
+    const bottomMessage = document.querySelector('.messageBoxTier2');
+
 
     const buttons = document.querySelectorAll(".buttonBox button");
     //set score to play to
     const goalScore = 5;
 
-
+    //set up page for a new game
     displayMessage(`Welcome to Rock Paper Scissors! You are playing to ${goalScore} points`,'.messageBoxTier1');
-    bottomMessage.innerHTML = "&nbsp;";
+    displayMessage('','.playerSelection');
+    displayMessage('','.computerSelection');
+    bottomMessage.innerHTML = '&nbsp;';
     colorBoxes('default');
     messageLines.style.color = "#000000";
 
