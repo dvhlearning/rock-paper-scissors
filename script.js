@@ -13,17 +13,19 @@ function getComputerChoice() {
 }
 
 function replayGame() {
-    let playChoice = prompt("Would you like to play again (yes or no)?:");
-    if (playChoice === 'yes') {
-        console.clear();
+    const replayBox = document.querySelector(".replayBox");
+    const replayButton = document.querySelector(".replayBox button");
+    replayBox.style.display = "block";
+
+    replayButton.addEventListener("click", function eventHandler() {
+        //remove eventListener from replay button
+        this.removeEventListener("click", eventHandler);
+        //remove replay button
+        replayBox.style.display = "none";
+        //restart game (sets scores to 0)
         playGame();
-    } else if (playChoice === 'no') {
-        console.log("\nHave a good day!");
-    } else {
-        console.log("Error: incorrect answer");
-        playChoice = prompt("Would you like to play again (yes or no)?:");
-        replayGame();
-    }
+    });
+
 }
 
 function displayMessage(content, location) {
@@ -55,11 +57,17 @@ function playGame() {
     let humanScore = 0;
     let computerScore = 0;
     let messageLines = document.querySelector(".messageBox");
+    let bottomMessage = document.querySelector('.messageBoxTier2');
+
+    const buttons = document.querySelectorAll(".buttonBox button");
+    //set score to play to
     const goalScore = 5;
-    const buttons = document.querySelectorAll("button");
+
 
     displayMessage(`Welcome to Rock Paper Scissors! You are playing to ${goalScore} points`,'.messageBoxTier1');
+    bottomMessage.innerHTML = "&nbsp;";
     colorBoxes('default');
+    messageLines.style.color = "#000000";
 
     function playRound(humanChoice,computerChoice) {
 
@@ -109,6 +117,7 @@ function playGame() {
     
         displayMessage(`Player Score: ${humanScore} vs. Computer Score: ${computerScore}`,".messageBoxTier2");
 
+        //end conditions met
         if (humanScore >= goalScore || computerScore >= goalScore) {
             if (humanScore > computerScore) {
                 displayMessage("CONGRATULATIONS! You win the game!",".messageBoxTier1");
@@ -123,7 +132,8 @@ function playGame() {
                 button.parentNode.replaceChild(newButton,button);
                 button = newButton;
             });
-            //replayGame();
+            //prompts player to replay game
+            replayGame();
         }
     }
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Rock Paper Scissors</title>
     <style>
         body {
             text-align: center;
@@ -15,7 +15,7 @@
         }
         div.messageBox {
             max-width: 500px;
-            margin: 2rem auto;
+            margin: 0 auto 2rem;
             background-color: #FFFDD0;
             border: 2px solid #4A2FEB;
             border-radius: 15px;
@@ -23,14 +23,16 @@
         }
         div.buttonBox {
             max-width: 500px;
-            margin: 0 auto;
+            margin: 0 auto 2rem;
             display: flex;
-            justify-content: space-evenly;
+            justify-content: center;
+            gap: 20px;
         }
         div.buttonBox button {
             background-color: #4A2FEB;
             color: #FFFFFF;
-            padding: 2rem;
+            width: 150px;
+            height: 100px;
             cursor: pointer;
             border-color: #826FF1;
         }
@@ -40,13 +42,11 @@
 
         div.combatBox {
             max-width: 500px;
-            margin: 0 auto;
+            margin: 0 auto 2rem;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 20px;
-        }
-        div.playerContainer, div.computerContainer {
         }
         div.playerSelection, div.computerSelection {
             background-color: #FFFDD0;
@@ -56,6 +56,22 @@
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        div.replayBox {
+            display: none;
+            max-width: 500px;
+            margin: 0 auto 2rem;
+        }
+        div.replayBox button {
+            background-color: #EB4A2F;
+            color: #FFFFFF;
+            padding: 2rem;
+            cursor: pointer;
+            border-color: #826FF1;
+        }
+        div.replayBox button:hover {
+            background-color: #F39484;
         }
     </style>
 </head>
@@ -86,6 +102,10 @@
         <button id="rock"><strong>rock</strong></button>
         <button id="paper"><strong>paper</strong></button>
         <button id="scissors"><strong>scissors</strong></button>
+    </div>
+
+    <div class="replayBox">
+        <button><strong>REPLAY</strong></button>
     </div>
 
     <script src="script.js"></script>
