@@ -26,69 +26,104 @@ function replayGame() {
     }
 }
 
-function displayMessage(content) {
-    let mBox = document.querySelector(".messageBox");
+function displayMessage(content, location) {
+    let mBox = document.querySelector(location);
     mBox.textContent = content;
+}
+
+function colorBoxes(outcome) {
+
+    let pBox = document.querySelector(".playerSelection");
+    let cBox = document.querySelector(".computerSelection");
+
+    if (outcome === 'win'){
+        pBox.style.backgroundColor = "lightgreen";
+        cBox.style.backgroundColor = "pink";
+    } else if (outcome === 'lose'){
+        pBox.style.backgroundColor = "pink";
+        cBox.style.backgroundColor = "lightgreen";
+    } else if (outcome === 'draw'){
+        pBox.style.backgroundColor = "#FFFFFF";
+        cBox.style.backgroundColor = "#FFFFFF";
+    } else if (outcome === 'default'){
+        pBox.style.backgroundColor = "#FFFDD0";
+        cBox.style.backgroundColor = "#FFFDD0";
+    }
 }
 
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
+    let messageLines = document.querySelector(".messageBox");
     const goalScore = 5;
-
-    displayMessage(`Welcome to Rock Paper Scissors! You are playing to ${goalScore} points`);
-
     const buttons = document.querySelectorAll("button");
 
+    displayMessage(`Welcome to Rock Paper Scissors! You are playing to ${goalScore} points`,'.messageBoxTier1');
+    colorBoxes('default');
 
     function playRound(humanChoice,computerChoice) {
-        console.log("You selected: " + humanChoice);
+
+        displayMessage(humanChoice, '.playerSelection');
+        displayMessage(computerChoice, '.computerSelection');
+
         if (humanChoice === "rock"){
             if (computerChoice === "rock") {
-                console.log("Tie! Rock cancels rock.");
+                displayMessage("Draw! Rock cancels rock.",".messageBoxTier1");
+                colorBoxes('draw')
             } else if (computerChoice === "paper") {
-                console.log("You lose! Paper beats rock.");
+                displayMessage("You lose! Paper beats rock.",".messageBoxTier1");
+                colorBoxes('lose')
                 computerScore++;
             } else {
-                console.log("You win! Rock beats scissors.");
+                displayMessage("You win! Rock beats scissors.",".messageBoxTier1");
+                colorBoxes('win')
                 humanScore++;
             }
         } else if (humanChoice === "paper") {
             if (computerChoice === "rock") {
-                console.log("You win! Paper beats rock.");
+                displayMessage("You win! Paper beats rock.",".messageBoxTier1");
+                colorBoxes('win')
                 humanScore++;
             } else if (computerChoice === "paper") {
-                console.log("Tie! Paper cancels paper.");
+                displayMessage("Draw! Paper cancels paper.",".messageBoxTier1");
+                colorBoxes('draw')
             } else {
-                console.log("You lose! Scissors beat paper.");
+                displayMessage("You lose! Scissors beat paper.",".messageBoxTier1");
+                colorBoxes('lose')
                 computerScore++;
             }
         } else {
             if (computerChoice === "rock") {
-                console.log("You lose! Rock beats scissors.");
+                displayMessage("You lose! Rock beats scissors.",".messageBoxTier1");
+                colorBoxes('lose')
                 computerScore++;
             } else if (computerChoice === "paper") {
-                console.log("You win! Scissors beat paper.");
+                displayMessage("You win! Scissors beat paper.",".messageBoxTier1");
+                colorBoxes('win')
                 humanScore++;
             } else {
-                console.log("Tie! Scissors cancel scissors.");
+                displayMessage("Draw! Scissors cancel scissors.",".messageBoxTier1");
+                colorBoxes('draw')
             }
         }
     
-        console.log("Your Score: " + humanScore + " vs. Computer: " + computerScore);
+        displayMessage(`Player Score: ${humanScore} vs. Computer Score: ${computerScore}`,".messageBoxTier2");
 
         if (humanScore >= goalScore || computerScore >= goalScore) {
             if (humanScore > computerScore) {
-                console.log("\nCONGRATULATIONS! You win the game!")
-                console.log("Your Score: " + humanScore + " vs. Computer: " + computerScore);
+                displayMessage("CONGRATULATIONS! You win the game!",".messageBoxTier1");
+                messageLines.style.color = "green";
             } else if (humanScore < computerScore) {
-                console.log("\nTOO BAD! You lose the game!")
-                console.log("Your Score: " + humanScore + " vs. Computer: " + computerScore);
-            } else if (humanScore === computerScore) {
-                console.log("\nYOU TIED THE GAME!")
-                console.log("Your Score: " + humanScore + " vs. Computer: " + computerScore);
+                displayMessage("TOO BAD! You lose the game!",".messageBoxTier1");
+                messageLines.style.color = "red";
             }
-            replayGame();
+            //removes eventListeners from buttons
+            buttons.forEach((button) => {
+                let newButton = button.cloneNode(true);
+                button.parentNode.replaceChild(newButton,button);
+                button = newButton;
+            });
+            //replayGame();
         }
     }
 

@@ -8,6 +8,7 @@
         body {
             text-align: center;
             background-color: lightcyan;
+            font-family: Arial, Helvetica, sans-serif;
         }
         h1 {
             color: #4A2FEB;
@@ -15,9 +16,10 @@
         div.messageBox {
             max-width: 500px;
             margin: 2rem auto;
-            background-color: white;
+            background-color: #FFFDD0;
             border: 2px solid #4A2FEB;
             border-radius: 15px;
+            padding: 5px;
         }
         div.buttonBox {
             max-width: 500px;
@@ -35,17 +37,55 @@
         div.buttonBox button:hover {
             background-color: #BAAFF7;
         }
+
+        div.combatBox {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+        div.playerContainer, div.computerContainer {
+        }
+        div.playerSelection, div.computerSelection {
+            background-color: #FFFDD0;
+            border: 2px solid #4A2FEB;
+            height: 100px;
+            width: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
     <h1>Rock Paper Scissors</h1>
 
-    <div class="messageBox"><span>&nbsp;</span></div>
+    <div class="combatBox">
+        <div class="playerContainer">
+            <span><strong>Player:</strong></span>
+            <div class="playerSelection"></div>
+        </div>
+        <div>
+            <div>&nbsp;</div>
+            <span><strong>VS.</strong></span>
+        </div>
+        <div class="computerContainer">
+            <span><strong>Computer:</strong></span>
+            <div class="computerSelection"></div>
+        </div>
+    </div>
+
+    <div class="messageBox">
+        <div class="messageBoxTier1">&nbsp;</div>
+        <div class="messageBoxTier2">&nbsp;</div>
+    </div>
 
     <div class="buttonBox">
-        <button id="rock"><strong>Rock</strong></button>
-        <button id="paper"><strong>Paper</strong></button>
-        <button id="scissors"><strong>Scissors</strong></button>
+        <button id="rock"><strong>rock</strong></button>
+        <button id="paper"><strong>paper</strong></button>
+        <button id="scissors"><strong>scissors</strong></button>
     </div>
 
     <script src="script.js"></script>
